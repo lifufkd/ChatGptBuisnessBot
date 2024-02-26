@@ -8,7 +8,7 @@ import platform
 import telebot
 import textwrap
 from config_parser import ConfigParser
-from backend import TempUserData, ChatGpt,
+from backend import TempUserData, ChatGpt, PDFCreate
 #####################################
 config_name = 'secrets.json'
 #####################################
@@ -42,8 +42,13 @@ def main():
                     bot.send_message(message.chat.id, "Мы подготавливаем для Вас персональный план...")
                     answer = chat_gpt.gpt_query(f"{','.join(temp_user_data.temp_data(user_id)[user_id][5])} for {temp_user_data.temp_data(user_id)[user_id][2]}",
                                        temp_user_data.temp_data(user_id)[user_id][1], 1)
-                    textwrap.fill(strs, 20)
-                    temp_user_data.temp_data(user_id)[user_id][2] = None
+                    pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], '\n'.join(answer))
+                    with open("plan.pdf", "rb") as misc:
+                        f = misc.read()
+                    bot.send_document(user_id, f)
+                    os.remove('plan.pdf')
+                    temp_user_data.temp_data(message.chat.id)[message.chat.id][0] = None
+                    temp_user_data.clear_temp_data(user_id)
 
     bot.polling(none_stop=True)
 
@@ -54,5 +59,6 @@ if '__main__' == __name__:
     config = ConfigParser(f'{work_dir}/{config_name}', os_type)
     temp_user_data = TempUserData()
     chat_gpt = ChatGpt()
+    pdf_creator = PDFCreate()
     bot = telebot.TeleBot(config.get_config()['tg_api'])
     main()
