@@ -6,7 +6,6 @@
 import copy
 from freeGPT import Client
 from langdetect import detect
-import textwrap
 #####################################
 
 

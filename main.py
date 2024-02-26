@@ -6,11 +6,11 @@
 import os
 import platform
 import telebot
+import textwrap
 from config_parser import ConfigParser
-from backend import TempUserData, ChatGpt
+from backend import TempUserData, ChatGpt,
 #####################################
 config_name = 'secrets.json'
-questions = ['What is your favorite color?', 'What is your favorite animal?', 'What is your favorite food?']
 #####################################
 
 
@@ -40,8 +40,9 @@ def main():
                     bot.send_message(message.chat.id, temp_user_data.temp_data(user_id)[user_id][4][index])
                 else:
                     bot.send_message(message.chat.id, "Мы подготавливаем для Вас персональный план...")
-                    print(chat_gpt.gpt_query(f"{','.join(temp_user_data.temp_data(user_id)[user_id][5])} for {temp_user_data.temp_data(user_id)[user_id][2]}",
-                                       temp_user_data.temp_data(user_id)[user_id][1], 1))
+                    answer = chat_gpt.gpt_query(f"{','.join(temp_user_data.temp_data(user_id)[user_id][5])} for {temp_user_data.temp_data(user_id)[user_id][2]}",
+                                       temp_user_data.temp_data(user_id)[user_id][1], 1)
+                    textwrap.fill(strs, 20)
                     temp_user_data.temp_data(user_id)[user_id][2] = None
 
     bot.polling(none_stop=True)
