@@ -27,11 +27,11 @@ class TempUserData:
             self.__user_data[user_id] = copy.deepcopy(self.__default)
 
 
-class ChatGpt:
-    def __init__(self):
-        super(ChatGpt, self).__init__()
-        self.__base_prompt = {'ru': {0: 'Составь наводящие вопросы помогающие составить бизнес план для ', 1: 'Составь бизнес план по ключевым особенностям '},
-                                'en': {0: 'Make up leading questions to help you make a business plan for ', 1: 'Make a business plan based on key features '}}
+# class ChatGpt:
+#     def __init__(self):
+#         super(ChatGpt, self).__init__()
+#         self.__base_prompt = {'ru': {0: 'Составь наводящие вопросы помогающие составить бизнес план для ', 1: 'Составь бизнес план по ключевым особенностям '},
+#                                 'en': {0: 'Make up leading questions to help you make a business plan for ', 1: 'Make a business plan based on key features '}}
 
     def detect_language(self, text):
         return detect(text)
@@ -74,10 +74,15 @@ class PDFCreate:
         pdf.image('logo.png', x=87, y=40, w=40, h=40)
         # Добавляем текст "Your Company Name"
         pdf.set_xy(0, 80)
+        # your_company_name = 'Your Company Name'
         pdf.cell(210, 20, company_name, 0, 1, 'C')
 
         # Добавляем длинный текст
-
+        # text = ("Lorem Ipsum is simply dummy text of the printing and typesetting industry. "
+        #         "Lorem Ipsum has been the industry standard dummy text ever since the 1500s, "
+        #         "when an unknown printer took a galley of type and scrambled it to make a type "
+        #         "specimen book. It has survived not only five centuries, but also the leap into "
+        #         "electronic typesetting, remaining essentially unchanged.")
         # Разбиваем текст на строки, чтобы он не выходил за границы страницы
         lines = pdf.multi_cell(w=0, h=10, txt=text)
 
