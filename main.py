@@ -5,6 +5,8 @@
 #####################################
 import os
 import platform
+from io import BytesIO
+
 import telebot
 import textwrap
 from config_parser import ConfigParser
@@ -43,9 +45,10 @@ def main():
                     answer = chat_gpt.gpt_query(f"{','.join(temp_user_data.temp_data(user_id)[user_id][5])} for {temp_user_data.temp_data(user_id)[user_id][2]}",
                                        temp_user_data.temp_data(user_id)[user_id][1], 1)
                     pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], '\n'.join(answer))
-                    with open("plan.pdf", "rb") as misc:
-                        f = misc.read()
-                    bot.send_document(user_id, f)
+                    with open("F:/Users/SBR/Desktop/PythonProjects/work/ChatGptBuisnessBot/plan.pdf", "rb") as misc:
+                        obj = BytesIO(misc.read())
+                        obj.name = 'plan.pdf'
+                    bot.send_document(user_id, obj)
                     os.remove('plan.pdf')
                     temp_user_data.temp_data(message.chat.id)[message.chat.id][0] = None
                     temp_user_data.clear_temp_data(user_id)
