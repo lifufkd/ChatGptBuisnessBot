@@ -66,12 +66,17 @@ class PDFCreate:
 
         # Добавляем текст "Your Company Name"
         pdf.set_xy(0, 80)
-        pdf.cell(210, 20, company_name, 0, 1, 'C')
-
-        # Добавляем длинный текст
-
-        # Разбиваем текст на строки, чтобы он не выходил за границы страницы
-        lines = pdf.multi_cell(w=0, h=10, txt=text)
-
+        text1 = 'chat-gpt create custom plan for you'
+        pdf.cell(210, 20, text1, 0, 1, 'C')
+        # Открываем созданный PDF файл и добавляем фотографию на каждую страницу
+        with Image.open('DesignPDF.png') as img:
+            img_width, img_height = img.size
+            for i in range(pdf.page_no()):
+                print(i)
+                pdf.add_page()
+                pdf.image('DesignPDF.png', x=0, y=0, w=210, h=297)
+                pdf.set_xy(0, 80)
+                pdf.cell(210, 20, company_name, 0, 1, 'C')
+                lines = pdf.multi_cell(w=0, h=10, txt=text)
         # Сохраняем изменения в PDF файле
         pdf.output('plan.pdf')
