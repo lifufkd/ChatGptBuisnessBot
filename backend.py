@@ -58,12 +58,20 @@ class PDFCreate:
         pdf.set_auto_page_break(auto=True, margin=15)
         pdf.set_font('Arial', size=20)
 
-        # Добавляем дизайн в PDF файл
-        pdf.image('DesignPDF.png', x=0, y=0, w=210, h=297)
+        # Загружаем фотографию
+        image_path = 'DesignPDF.png'
 
-        # Добавляем логотип в правом верхнем углу
+        # Функция для вставки изображения на каждую страницу
+        def add_image_on_page(image_path):
+            pdf.image(image_path, x=0, y=0, w=210, h=297)
+
+        # Вставляем дизайн на каждую страницу
+        for i in range(1, pdf.page_no() + 1):
+            pdf.set_page(i)
+            add_image_on_page(image_path)
+
+        # Добавляем логотип
         pdf.image('logo.png', x=87, y=40, w=40, h=40)
-
         # Добавляем текст "Your Company Name"
         pdf.set_xy(0, 80)
         text1 = 'chat-gpt create custom plan for you'
