@@ -45,7 +45,7 @@ def main():
                     answer = chat_gpt.gpt_query(f"{','.join(temp_user_data.temp_data(user_id)[user_id][5])} for {temp_user_data.temp_data(user_id)[user_id][2]}",
                                        temp_user_data.temp_data(user_id)[user_id][1], 1)
                     pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], '\n'.join(answer))
-                    with open("F:/Users/SBR/Desktop/PythonProjects/work/ChatGptBuisnessBot/plan.pdf", "rb") as misc:
+                    with open("plan.pdf", "rb") as misc:
                         obj = BytesIO(misc.read())
                         obj.name = 'plan.pdf'
                     bot.send_document(user_id, obj)

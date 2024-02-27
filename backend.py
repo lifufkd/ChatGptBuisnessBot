@@ -8,6 +8,8 @@ from freeGPT import Client
 from langdetect import detect
 from fpdf import FPDF
 from PIL import Image
+
+
 #####################################
 
 
@@ -19,7 +21,8 @@ class TempUserData:
 
     def temp_data(self, user_id):
         if user_id not in self.__user_data.keys():
-            self.__user_data.update({user_id: [None, None, None, -1, [], []]}) # status, lang, main_question, counter_of_sub_quests, answers
+            self.__user_data.update({user_id: [None, None, None, -1, [],
+                                               []]})  # status, lang, main_question, counter_of_sub_quests, answers
         return self.__user_data
 
     def clear_temp_data(self, user_id):
@@ -30,8 +33,10 @@ class TempUserData:
 class ChatGpt:
     def __init__(self):
         super(ChatGpt, self).__init__()
-        self.__base_prompt = {'ru': {0: 'Составь наводящие вопросы помогающие составить бизнес план для ', 1: 'Составь бизнес план по ключевым особенностям '},
-                                'en': {0: 'Make up leading questions to help you make a business plan for ', 1: 'Make a business plan based on key features '}}
+        self.__base_prompt = {'ru': {0: 'Составь наводящие вопросы помогающие составить бизнес план для ',
+                                     1: 'Составь бизнес план по ключевым особенностям '},
+                              'en': {0: 'Make up leading questions to help you make a business plan for ',
+                                     1: 'Make a business plan based on key features '}}
 
     def detect_language(self, text):
         return detect(text)
@@ -56,35 +61,36 @@ class PDFCreate:
         pdf = FPDF()
         pdf.add_page()
         pdf.set_auto_page_break(auto=True, margin=15)
-        pdf.set_font('Arial', size=20)
 
-        # Загружаем фотографию
-        image_path = 'DesignPDF.png'
+        # Добавляем первую страницу в PDF файл
+        pdf.image('FirstPage.png', x=0, y=0, w=210, h=297)
 
-        # Функция для вставки изображения на каждую страницу
-        def add_image_on_page(image_path):
-            pdf.image(image_path, x=0, y=0, w=210, h=297)
+        # Добавляем вторую страницу в PDF файл
+        pdf.add_page()
+        pdf.image('SecondPage.png', x=0, y=0, w=210, h=297)
+        pdf.set_xy(0, 100)
+        pdf.set_font('Arial', size=28)
+        pdf.cell(350, -100, company_name, 0, 1, 'C')
+        pdf.set_font('Arial', size=15)
 
-        # Вставляем дизайн на каждую страницу
-        for i in range(1, pdf.page_no() + 1):
-            pdf.set_page(i)
-            add_image_on_page(image_path)
+        # Добавляем ответы бота на 10 вопросов
+        pdf.set_xy(0, 100)
+        lines = pdf.multi_cell(w=0, h=10, txt=text)
 
-        # Добавляем логотип
-        pdf.image('logo.png', x=87, y=40, w=40, h=40)
-        # Добавляем текст "Your Company Name"
-        pdf.set_xy(0, 80)
-        text1 = 'chat-gpt create custom plan for you'
-        pdf.cell(210, 20, text1, 0, 1, 'C')
-        # Открываем созданный PDF файл и добавляем фотографию на каждую страницу
-        with Image.open('DesignPDF.png') as img:
-            img_width, img_height = img.size
-            for i in range(pdf.page_no()):
-                print(i)
-                pdf.add_page()
-                pdf.image('DesignPDF.png', x=0, y=0, w=210, h=297)
-                pdf.set_xy(0, 80)
-                pdf.cell(210, 20, company_name, 0, 1, 'C')
-                lines = pdf.multi_cell(w=0, h=10, txt=text)
+        # # Добавляем третью страницу в PDF файл
+        # pdf.add_page()
+        # pdf.image('ThirdPage.png', x=0, y=0, w=210, h=297)
+        # pdf.set_xy(0, 100)
+        # pdf.set_font('Arial', size=28)
+        # pdf.cell(210, 0, company_name, 0, 1, 'C')
+        # pdf.set_font('Arial', size=15)
+
+        # # Добавляем текст-рекомендацию
+        # pdf.multi_cell(w=0, h=10, txt=text1)
+
+        # Добавляем последнюю страницу в PDF файл
+        pdf.add_page()
+        pdf.image('LastPage.png', x=0, y=0, w=210, h=297)
+
         # Сохраняем изменения в PDF файле
         pdf.output('plan.pdf')
