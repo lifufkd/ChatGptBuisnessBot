@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="c9db9246-5816-482a-9681-3ac3e16b49e5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709126837199</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="bebra">
+      <option name="closed" value="true" />
+      <created>1709131438501</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1709131438501</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -171,7 +178,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="wdc" />
     <MESSAGE value="I won." />
-    <option name="LAST_COMMIT_MESSAGE" value="I won." />
+    <MESSAGE value="bebra" />
+    <option name="LAST_COMMIT_MESSAGE" value="bebra" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TGBOT_ChatGPTforBuisness$pdfcheck.coverage" NAME="pdfcheck Coverage Results" MODIFIED="1708981230049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
