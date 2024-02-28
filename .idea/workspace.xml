@@ -5,6 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c9db9246-5816-482a-9681-3ac3e16b49e5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/FirstPage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/LastPage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SecondPage.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ThirdPage.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/ChatGptBuisnessBot.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ChatGptBuisnessBot.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -39,6 +45,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\Users\SBR\Desktop\PythonProjects\work\ChatGptBuisnessBot" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -48,7 +59,8 @@
       <option name="presentableId" value="Default" />
       <updated>1708983789440</updated>
       <workItem from="1708983790439" duration="1492000" />
-      <workItem from="1709013017897" duration="6409000" />
+      <workItem from="1709013017897" duration="8912000" />
+      <workItem from="1709123969071" duration="613000" />
     </task>
     <task id="LOCAL-00001" summary="wdc">
       <option name="closed" value="true" />
@@ -66,7 +78,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709017139754</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="I won.">
+      <option name="closed" value="true" />
+      <created>1709056690461</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1709056690461</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -90,7 +110,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ChatGptBuisnessBot$backend.coverage" NAME="backend Coverage Results" MODIFIED="1709015599658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ChatGptBuisnessBot$main.coverage" NAME="main Coverage Results" MODIFIED="1709056508095" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ChatGptBuisnessBot$main.coverage" NAME="main Coverage Results" MODIFIED="1709059590564" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ChatGptBuisnessBot$chat_gpt.coverage" NAME="chat-gpt Coverage Results" MODIFIED="1708978563572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
