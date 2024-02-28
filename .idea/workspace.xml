@@ -4,10 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c9db9246-5816-482a-9681-3ac3e16b49e5" name="Changes" comment="I won.">
+    <list default="true" id="c9db9246-5816-482a-9681-3ac3e16b49e5" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +49,8 @@
       <updated>1708983789440</updated>
       <workItem from="1708983790439" duration="1492000" />
       <workItem from="1709013017897" duration="4051000" />
-      <workItem from="1709055025523" duration="1355000" />
+      <workItem from="1709055025523" duration="1599000" />
+      <workItem from="1709124405171" duration="1357000" />
     </task>
     <task id="LOCAL-00001" summary="wdc">
       <option name="closed" value="true" />
@@ -60,7 +60,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708983826271</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="I won PDF.">
+      <option name="closed" value="true" />
+      <created>1709056504935</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1709056504935</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -78,15 +86,17 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="wdc" />
-    <option name="LAST_COMMIT_MESSAGE" value="wdc" />
+    <MESSAGE value="I won PDF." />
+    <option name="LAST_COMMIT_MESSAGE" value="I won PDF." />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TGBOT_ChatGPTforBuisness$pdfcheck.coverage" NAME="pdfcheck Coverage Results" MODIFIED="1708981230049" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/TGBOT_ChatGPTforBuisness$main.coverage" NAME="main Coverage Results" MODIFIED="1709055713670" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TGBOT_ChatGPTforBuisness$main.coverage" NAME="main Coverage Results" MODIFIED="1709125530466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ChatGptBuisnessBot$backend.coverage" NAME="backend Coverage Results" MODIFIED="1709015599658" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ChatGptBuisnessBot$chat_gpt.coverage" NAME="chat-gpt Coverage Results" MODIFIED="1708978563572" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/TGBOT_ChatGPTforBuisness$backend.coverage" NAME="backend Coverage Results" MODIFIED="1709055848613" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/TGBOT_ChatGPTforBuisness$backend.coverage" NAME="backend Coverage Results" MODIFIED="1709125523604" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/ChatGptBuisnessBot$main.coverage" NAME="main Coverage Results" MODIFIED="1708985109716" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
