@@ -47,11 +47,11 @@ def main():
                 answer = chat_gpt.gpt_query(
                     f"{','.join(temp_user_data.temp_data(user_id)[user_id][5])} for {temp_user_data.temp_data(user_id)[user_id][2]}",
                     temp_user_data.temp_data(user_id)[user_id][1], 1)
-                out.append('\n'.join(answer)[:851])
-                for i in '\n'.join(answer)[851:]:
+                out.append('\n'.join(answer)[:801])
+                for i in '\n'.join(answer)[801:]:
                     s += i
                     counter += 1
-                    if counter % 1559 == 0:
+                    if counter % 1359 == 0:
                         out.append(s)
                         s = ''
                 out.append(s)
