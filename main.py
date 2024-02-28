@@ -47,9 +47,8 @@ def main():
                 answer = chat_gpt.gpt_query(
                     f"{','.join(temp_user_data.temp_data(user_id)[user_id][5])} for {temp_user_data.temp_data(user_id)[user_id][2]}",
                     temp_user_data.temp_data(user_id)[user_id][1], 1)
-                print(len('\n'.join(answer)))
-                out.append('\n'.join(answer)[:1001])
-                for i in '\n'.join(answer)[1001:]:
+                out.append('\n'.join(answer)[:851])
+                for i in '\n'.join(answer)[851:]:
                     s += i
                     counter += 1
                     if counter % 1559 == 0:

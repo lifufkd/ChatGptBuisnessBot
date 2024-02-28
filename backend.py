@@ -57,7 +57,6 @@ class PDFCreate:
         super(PDFCreate, self).__init__()
 
     def create_pdf(self, company_name, text):
-        print(text)
         # Создаем PDF файл с дизайном
         pdf = FPDF()
         pdf.add_page()
@@ -80,12 +79,10 @@ class PDFCreate:
         lines = pdf.multi_cell(w=0, h=10, txt=text[0])
 
         # # Добавляем третью и тд страницу в PDF файл
-        for i in range(len(text) - 1):
+        for i in range(1, len(text)):
             pdf.add_page()
             pdf.image('ThirdPage.png', x=0, y=0, w=210, h=297)
-            pdf.set_xy(0, 100)
-            pdf.set_font('Arial', size=28)
-            pdf.cell(210, 0, text[i + 1], 0, 1, 'C')
+            pdf.multi_cell(w=0, h=10, txt=text[i])
 
         # # Добавляем текст-рекомендацию
         # pdf.multi_cell(w=0, h=10, txt=text1)
