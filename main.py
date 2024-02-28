@@ -6,9 +6,8 @@
 import os
 import platform
 from io import BytesIO
-
 import telebot
-import textwrap
+import re
 from config_parser import ConfigParser
 from backend import TempUserData, ChatGpt, PDFCreate
 #####################################
@@ -45,7 +44,9 @@ def main():
                 answer = chat_gpt.gpt_query(
                     f"{','.join(temp_user_data.temp_data(user_id)[user_id][5])} for {temp_user_data.temp_data(user_id)[user_id][2]}",
                     temp_user_data.temp_data(user_id)[user_id][1], 1)
-                pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], '\n'.join(answer))
+                substrings = re.findall(".{1," + str(len('\n'.join(answer)[1001:]) // 1559) + "}", '\n'.join(answer)[1001:])
+                substrings.insert(0, '\n'.join(answer)[:1001])
+                pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], substrings)
                 with open("plan.pdf", "rb") as misc:
                     obj = BytesIO(misc.read())
                     obj.name = 'plan.pdf'
