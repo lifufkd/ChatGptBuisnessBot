@@ -69,8 +69,10 @@ class PDFCreate:
         pdf.add_page()
         pdf.image('SecondPage.png', x=0, y=0, w=210, h=297)
         pdf.set_xy(0, 100)
-        pdf.set_font('Arial', size=28)
-        pdf.cell(350, -100, company_name, 0, 1, 'C')
+        pdf.set_text_color(255, 255, 255)
+        pdf.set_font('Arial', size=28, style='B')
+        pdf.cell(220, -100, company_name, 0, 1, 'C')
+        pdf.set_text_color(0, 0, 0)
         pdf.set_font('Arial', size=15)
 
         # Добавляем ответы бота на 10 вопросов
