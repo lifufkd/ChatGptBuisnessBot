@@ -57,6 +57,7 @@ class PDFCreate:
         super(PDFCreate, self).__init__()
 
     def create_pdf(self, company_name, text):
+        print(text)
         # Создаем PDF файл с дизайном
         pdf = FPDF()
         pdf.add_page()
