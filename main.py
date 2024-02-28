@@ -47,6 +47,7 @@ def main():
                 answer = chat_gpt.gpt_query(
                     f"{','.join(temp_user_data.temp_data(user_id)[user_id][5])} for {temp_user_data.temp_data(user_id)[user_id][2]}",
                     temp_user_data.temp_data(user_id)[user_id][1], 1)
+                print(len('\n'.join(answer)))
                 out.append('\n'.join(answer)[:1001])
                 for i in '\n'.join(answer)[1001:]:
                     s += i
@@ -54,6 +55,7 @@ def main():
                     if counter % 1559 == 0:
                         out.append(s)
                         s = ''
+                out.append(s)
                 print(len(out))
                 pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], out)
                 with open("plan.pdf", "rb") as misc:
