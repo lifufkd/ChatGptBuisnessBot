@@ -40,7 +40,7 @@ def main():
                 index = temp_user_data.temp_data(user_id)[user_id][3]
                 bot.send_message(message.chat.id, temp_user_data.temp_data(user_id)[user_id][4][index])
             else:
-                bot.send_message(message.chat.id, "Мы подготавливаем для Вас персональный план...")
+                bot.send_message(message.chat.id, "We prepare a personal plan for you...")
                 answer = chat_gpt.gpt_query(
                     f"{','.join(temp_user_data.temp_data(user_id)[user_id][5])} for {temp_user_data.temp_data(user_id)[user_id][2]}",
                     temp_user_data.temp_data(user_id)[user_id][1], 1)

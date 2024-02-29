@@ -65,6 +65,11 @@ class PDFCreate:
         # Добавляем первую страницу в PDF файл
         pdf.image('FirstPage.png', x=0, y=0, w=210, h=297)
 
+        # Добавляем вторую страницу с дизайном в PDF файл
+        pdf.add_page()
+        pdf.image('PageNo2.png', x=0, y=0, w=210, h=297)
+
+
         # Добавляем вторую страницу в PDF файл
         pdf.add_page()
         pdf.image('SecondPage.png', x=0, y=0, w=210, h=297)
