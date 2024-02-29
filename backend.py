@@ -76,16 +76,8 @@ class PDFCreate:
         pdf.set_font('Arial', size=15)
         # Добавляем ответы бота на 10 вопросов
         pdf.set_xy(0, 100)
-        lines = pdf.multi_cell(w=0, h=10, txt=text[0])
+        pdf.multi_cell(w=0, h=10, txt=text)
 
-        # # Добавляем третью и тд страницу в PDF файл
-        for i in range(1, len(text)):
-            pdf.add_page()
-            pdf.image('ThirdPage.png', x=0, y=0, w=210, h=297)
-            pdf.multi_cell(w=0, h=10, txt=text[i])
-
-        # # Добавляем текст-рекомендацию
-        # pdf.multi_cell(w=0, h=10, txt=text1)
 
         # Добавляем последнюю страницу в PDF файл
         pdf.add_page()

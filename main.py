@@ -40,23 +40,11 @@ def main():
                 index = temp_user_data.temp_data(user_id)[user_id][3]
                 bot.send_message(message.chat.id, temp_user_data.temp_data(user_id)[user_id][4][index])
             else:
-                out = list()
-                s = ''
-                counter = 0
                 bot.send_message(message.chat.id, "Мы подготавливаем для Вас персональный план...")
                 answer = chat_gpt.gpt_query(
                     f"{','.join(temp_user_data.temp_data(user_id)[user_id][5])} for {temp_user_data.temp_data(user_id)[user_id][2]}",
                     temp_user_data.temp_data(user_id)[user_id][1], 1)
-                out.append('\n'.join(answer)[:851])
-                for i in '\n'.join(answer)[851:]:
-                    s += i
-                    counter += 1
-                    if counter % 1559 == 0:
-                        out.append(s)
-                        s = ''
-                out.append(s)
-                print(len(out))
-                pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], out)
+                pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], '\n'.join(answer))
                 with open("plan.pdf", "rb") as misc:
                     obj = BytesIO(misc.read())
                     obj.name = 'plan.pdf'
