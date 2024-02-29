@@ -35,14 +35,14 @@ def main():
             bot.send_message(message.chat.id, temp_user_data.temp_data(user_id)[user_id][4][0])
         else:
             if temp_user_data.temp_data(user_id)[user_id][3] != len(temp_user_data.temp_data(user_id)[user_id][4]) - 1:
-                temp_user_data.temp_data(user_id)[user_id][5].append(user_input)
+                temp_user_data.temp_data(user_id)[user_id][5].append(f'{temp_user_data.temp_data(user_id)[user_id][3]+1.} {user_input}')
                 temp_user_data.temp_data(user_id)[user_id][3] += 1
                 index = temp_user_data.temp_data(user_id)[user_id][3]
                 bot.send_message(message.chat.id, temp_user_data.temp_data(user_id)[user_id][4][index])
             else:
                 bot.send_message(message.chat.id, "We prepare a personal plan for you...")
                 answer = chat_gpt.gpt_query(
-                    f"{','.join(temp_user_data.temp_data(user_id)[user_id][5])} for {temp_user_data.temp_data(user_id)[user_id][2]}",
+                    f"\nQuestions:\n{','.join(temp_user_data.temp_data(user_id)[user_id][4])}\nAnswers to the above questions:\n{','.join(temp_user_data.temp_data(user_id)[user_id][5])}\n For a business with a name {temp_user_data.temp_data(user_id)[user_id][2]}",
                     temp_user_data.temp_data(user_id)[user_id][1], 1)
                 pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], '\n'.join(answer))
                 with open("plan.pdf", "rb") as misc:
