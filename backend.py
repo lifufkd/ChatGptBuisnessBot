@@ -76,7 +76,7 @@ class PDFCreate:
         pdf.set_xy(0, 100)
         pdf.set_text_color(255, 255, 255)
         pdf.set_font('Arial', size=28, style='B')
-        pdf.cell(220, -100, company_name, 0, 1, 'C')
+        pdf.cell(220, -125, company_name, 0, 1, 'C')
         pdf.set_text_color(0, 0, 0)
         pdf.set_font('Arial', size=15)
         # Добавляем ответы бота на 10 вопросов
@@ -84,9 +84,9 @@ class PDFCreate:
         pdf.multi_cell(w=0, h=10, txt=text)
 
 
-        # Добавляем последнюю страницу в PDF файл
-        pdf.add_page()
-        pdf.image('LastPage.png', x=0, y=0, w=210, h=297)
+        # # Добавляем последнюю страницу в PDF файл
+        # pdf.add_page()
+        # pdf.image('LastPage.png', x=0, y=0, w=210, h=297)
 
         # Сохраняем изменения в PDF файле
         pdf.output('plan.pdf')
