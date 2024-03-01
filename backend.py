@@ -8,6 +8,7 @@ from freeGPT import Client
 from langdetect import detect
 from fpdf import FPDF
 from PIL import Image
+from googletrans import Translator
 
 
 #####################################
@@ -33,10 +34,10 @@ class TempUserData:
 class ChatGpt:
     def __init__(self):
         super(ChatGpt, self).__init__()
-        self.__base_prompt = {'ru': {0: 'Составь наводящие вопросы, связанные друг с другом помогающие скоректировать курс уже запущенного бизнеса, так же приведи примеры и результат. Название моего бизнеса: ',
-                                     1: 'Напиши очень подробный бизнес-план для моего бизнеса отвечающего требованиям по вопросам и ответам на них в соответственном порядке.'},
-                              'en': {0: 'Compose leading questions that are related to each other and help speed up the progress of business, as well as provide an example and result. My business name:',
-                                     1: 'Write a very detailed business plan for my business meeting the requirements of the questions and their answers in the appropriate order.'}}
+        self.__base_prompt = {'ru': {0: 'Составь наводящие вопросы связанные друг с другом помогающие скоректировать курс бизнеса название моего бизнеса ',
+                                     1: 'Напиши подробный бизнес-план для моего бизнеса отвечающего требованиям по вопросам и ответам на них в соответственном порядке'},
+                              'en': {0: 'Make up guiding questions related to each other that help correct the course of the business also give examples and results my business name ',
+                                     1: 'Write a very detailed business plan for my business that meets the requirements for questions and answers in the appropriate order'}}
 
     def detect_language(self, text):
         return detect(text)
@@ -47,7 +48,6 @@ class ChatGpt:
         answer = ''
         try:
             answer = Client.create_completion("gpt3", f'{self.__base_prompt[lang][index]}{prompt}')
-            print(answer)
         except:
             pass
         return answer.split('\n')
@@ -58,8 +58,10 @@ class PDFCreate:
         super(PDFCreate, self).__init__()
 
     def create_pdf(self, company_name, text):
+        print(text)
         # Создаем PDF файл с дизайном
         pdf = FPDF()
+        pdf.add_font('Arial', '', 'arial.ttf', uni=True)
         pdf.add_page()
         pdf.set_auto_page_break(auto=True, margin=15)
 
@@ -76,7 +78,7 @@ class PDFCreate:
         pdf.image('SecondPage.png', x=0, y=0, w=210, h=297)
         pdf.set_xy(0, 100)
         pdf.set_text_color(255, 255, 255)
-        pdf.set_font('Arial', size=28, style='B')
+        pdf.set_font('Arial', 'B', size=28)
         pdf.cell(220, -125, company_name, 0, 1, 'C')
         pdf.set_text_color(0, 0, 0)
         pdf.set_font('Arial', size=15)

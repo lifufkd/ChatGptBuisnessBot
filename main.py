@@ -6,9 +6,8 @@
 import os
 import platform
 from io import BytesIO
-
+from googletrans import Translator
 import telebot
-
 from backend import TempUserData, ChatGpt, PDFCreate
 from config_parser import ConfigParser
 
@@ -24,20 +23,36 @@ def main():
     def send_question(message):
         user_id = message.chat.id
         print(message.from_user.language_code)
-        bot.send_message(message.chat.id,
-                         "Hi! Enter a name for your business! I will help you with the development of a private "
-                         "business plan!")
+        if message.from_user.language_code == 'ru':
+            bot.send_message(message.chat.id,
+                             "Привет! Введите название для вашего бизнеса! Я Помогу Вам с развитием частного "
+                               "бизнес-плана!")
+        elif message.from_user.language_code == 'en':
+            bot.send_message(message.chat.id,
+                             "Hi! Enter a name for your business! I will help you with the development of a private "
+                             "business plan!")
         temp_user_data.clear_temp_data(user_id)
 
     @bot.message_handler(content_types=['text'])
     def text(message):
+        translator = Translator(service_urls=[
+        	'translate.google.com',
+        ])
+        #translator = Translator()
         user_input = message.text
         user_id = message.chat.id
         if temp_user_data.temp_data(user_id)[user_id][3] == -1:
-            temp_user_data.temp_data(user_id)[user_id][1] = chat_gpt.detect_language(user_input)
+            temp_user_data.temp_data(user_id)[user_id][1] = message.from_user.language_code
             temp_user_data.temp_data(user_id)[user_id][2] = user_input
-            temp_user_data.temp_data(user_id)[user_id][4].extend(
-                chat_gpt.gpt_query(user_input, temp_user_data.temp_data(user_id)[user_id][1], 0))
+            questions = chat_gpt.gpt_query(user_input, temp_user_data.temp_data(user_id)[user_id][1], 0)
+            if message.from_user.language_code == 'ru':
+                for i in questions:
+                    try:
+                        temp_user_data.temp_data(user_id)[user_id][4].append(translator.translate(i, dest='ru').text)
+                    except:
+                        pass
+            else:
+                temp_user_data.temp_data(user_id)[user_id][4].extend(questions)
             temp_user_data.temp_data(user_id)[user_id][3] = 0
             bot.send_message(message.chat.id, temp_user_data.temp_data(user_id)[user_id][4][0])
         else:
@@ -47,11 +62,18 @@ def main():
                 index = temp_user_data.temp_data(user_id)[user_id][3]
                 bot.send_message(message.chat.id, temp_user_data.temp_data(user_id)[user_id][4][index])
             else:
-                bot.send_message(message.chat.id, "We prepare a personal plan for you...")
+                if message.from_user.language_code == 'ru':
+                    bot.send_message(message.chat.id, "Мы уже подготавливаем вам персональный план!")
+                elif message.from_user.language_code == 'en':
+                    bot.send_message(message.chat.id, "We already prepared your personal plan!")
                 answer = chat_gpt.gpt_query(
                     f"\nQuestions:\n{','.join(temp_user_data.temp_data(user_id)[user_id][4])}\nAnswers to the above questions:\n{','.join(temp_user_data.temp_data(user_id)[user_id][5])}\n For a business with a name {temp_user_data.temp_data(user_id)[user_id][2]}",
                     temp_user_data.temp_data(user_id)[user_id][1], 1)
-                pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], '\n'.join(answer))
+                # rus_text = translator.translate('\n'.join(answer), dest='ru').text
+                try:
+                    pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], translator.translate('\n'.join(answer), dest='ru').text) #\n join answer chat gpt выдает ответы в формате стоки на английском
+                except:
+                    pass
                 with open("plan.pdf", "rb") as misc:
                     obj = BytesIO(misc.read())
                     obj.name = 'plan.pdf'
