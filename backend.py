@@ -34,9 +34,9 @@ class ChatGpt:
     def __init__(self):
         super(ChatGpt, self).__init__()
         self.__base_prompt = {'ru': {0: 'Составь наводящие вопросы помогающие составить бизнес план для ',
-                                     1: 'Составь бизнес план по ключевым особенностям '},
+                                     1: 'Напиши очень подробный бизнес-план для моего бизнеса отвечающего требованиям по вопросам и ответам на них в соответственном порядке'},
                               'en': {0: 'Make up leading questions to help you make a business plan for ',
-                                     1: 'Make a business plan based on key features '}}
+                                     1: 'Write a very detailed business plan for my business that meets the requirements for questions and answers in the appropriate order'}}
 
     def detect_language(self, text):
         return detect(text)
