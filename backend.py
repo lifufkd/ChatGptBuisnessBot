@@ -33,10 +33,10 @@ class TempUserData:
 class ChatGpt:
     def __init__(self):
         super(ChatGpt, self).__init__()
-        self.__base_prompt = {'ru': {0: 'Составь наводящие вопросы помогающие составить бизнес план для ',
-                                     1: 'Напиши очень подробный бизнес-план для моего бизнеса отвечающего требованиям по вопросам и ответам на них в соответственном порядке'},
-                              'en': {0: 'Make up leading questions to help you make a business plan for ',
-                                     1: 'Write a very detailed business plan for my business that meets the requirements for questions and answers in the appropriate order'}}
+        self.__base_prompt = {'ru': {0: 'Составь наводящие вопросы, связанные друг с другом помогающие скоректировать курс уже запущенного бизнеса, так же приведи примеры и результат. Название моего бизнеса: ',
+                                     1: 'Напиши очень подробный бизнес-план для моего бизнеса отвечающего требованиям по вопросам и ответам на них в соответственном порядке.'},
+                              'en': {0: 'Compose leading questions that are related to each other and help speed up the progress of business, as well as provide an example and result. My business name:',
+                                     1: 'Write a very detailed business plan for my business meeting the requirements of the questions and their answers in the appropriate order.'}}
 
     def detect_language(self, text):
         return detect(text)
@@ -47,6 +47,7 @@ class ChatGpt:
         answer = ''
         try:
             answer = Client.create_completion("gpt3", f'{self.__base_prompt[lang][index]}{prompt}')
+            print(answer)
         except:
             pass
         return answer.split('\n')

@@ -23,6 +23,7 @@ def main():
     @bot.message_handler(commands=['start'])
     def send_question(message):
         user_id = message.chat.id
+        print(message.from_user.language_code)
         bot.send_message(message.chat.id,
                          "Hi! Enter a name for your business! I will help you with the development of a private "
                          "business plan!")
