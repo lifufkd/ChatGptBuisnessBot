@@ -6,12 +6,16 @@
 import os
 import platform
 from io import BytesIO
+
 import telebot
-import re
-from config_parser import ConfigParser
+
 from backend import TempUserData, ChatGpt, PDFCreate
+from config_parser import ConfigParser
+
 #####################################
 config_name = 'secrets.json'
+
+
 #####################################
 
 
@@ -19,7 +23,9 @@ def main():
     @bot.message_handler(commands=['start'])
     def send_question(message):
         user_id = message.chat.id
-        bot.send_message(message.chat.id, "Hi! Enter a name for your business! I will help you with the development of a private business plan!")
+        bot.send_message(message.chat.id,
+                         "Hi! Enter a name for your business! I will help you with the development of a private "
+                         "business plan!")
         temp_user_data.clear_temp_data(user_id)
 
     @bot.message_handler(content_types=['text'])
@@ -51,7 +57,6 @@ def main():
                 bot.send_document(user_id, obj)
                 os.remove('plan.pdf')
                 temp_user_data.clear_temp_data(user_id)
-
 
     bot.polling(none_stop=True)
 
