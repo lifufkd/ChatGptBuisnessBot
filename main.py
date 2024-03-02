@@ -54,7 +54,8 @@ def main():
             else:
                 temp_user_data.temp_data(user_id)[user_id][4].extend(questions)
             temp_user_data.temp_data(user_id)[user_id][3] = 0
-            bot.send_message(message.chat.id, temp_user_data.temp_data(user_id)[user_id][4][0])
+            print(temp_user_data.temp_data(user_id)[user_id][4][0])
+            bot.send_message(message.chat.id, temp_user_data.temp_data(user_id)[user_id][4][0]) # ошибка была
         else:
             if temp_user_data.temp_data(user_id)[user_id][3] != len(temp_user_data.temp_data(user_id)[user_id][4]) - 1:
                 temp_user_data.temp_data(user_id)[user_id][5].append(f'{temp_user_data.temp_data(user_id)[user_id][3]+1.} {user_input}')
