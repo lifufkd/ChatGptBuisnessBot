@@ -6,7 +6,18 @@
 import os
 import platform
 from io import BytesIO
-from googletrans import Translator
+from deep_translator import (GoogleTranslator,
+                             ChatGptTranslator,
+                             MicrosoftTranslator,
+                             PonsTranslator,
+                             LingueeTranslator,
+                             MyMemoryTranslator,
+                             YandexTranslator,
+                             PapagoTranslator,
+                             DeeplTranslator,
+                             QcriTranslator,
+                             single_detection,
+                             batch_detection)
 import telebot
 from backend import TempUserData, ChatGpt, PDFCreate
 from config_parser import ConfigParser
@@ -22,7 +33,6 @@ def main():
     @bot.message_handler(commands=['start'])
     def send_question(message):
         user_id = message.chat.id
-        print(message.from_user.language_code)
         if message.from_user.language_code == 'ru':
             bot.send_message(message.chat.id,
                              "Привет! Введите название для вашего бизнеса! Я Помогу Вам с развитием частного "
@@ -35,20 +45,16 @@ def main():
 
     @bot.message_handler(content_types=['text'])
     def text(message):
-        translator = Translator(service_urls=[
-        	'translate.google.com',
-        ])
-        #translator = Translator()
         user_input = message.text
         user_id = message.chat.id
         if temp_user_data.temp_data(user_id)[user_id][3] == -1:
             temp_user_data.temp_data(user_id)[user_id][1] = message.from_user.language_code
-            temp_user_data.temp_data(user_id)[user_id][2] = user_input
+            temp_user_data.temp_data(user_id)[user_id][2] = GoogleTranslator(source='auto', target='en').translate(text=user_input)
             questions = chat_gpt.gpt_query(user_input, temp_user_data.temp_data(user_id)[user_id][1], 0)
             if message.from_user.language_code == 'ru':
                 for i in questions:
                     try:
-                        temp_user_data.temp_data(user_id)[user_id][4].append(translator.translate(i, dest='ru').text)
+                        temp_user_data.temp_data(user_id)[user_id][4].append(GoogleTranslator(source='en', target='ru').translate(text=i))
                     except:
                         pass
             else:
@@ -67,19 +73,24 @@ def main():
                     bot.send_message(message.chat.id, "Мы уже подготавливаем вам персональный план!")
                 elif message.from_user.language_code == 'en':
                     bot.send_message(message.chat.id, "We already prepared your personal plan!")
-                answer = chat_gpt.gpt_query(
-                    f"\nQuestions:\n{','.join(temp_user_data.temp_data(user_id)[user_id][4])}\nAnswers to the above questions:\n{','.join(temp_user_data.temp_data(user_id)[user_id][5])}\n For a business with a name {temp_user_data.temp_data(user_id)[user_id][2]}",
-                    temp_user_data.temp_data(user_id)[user_id][1], 1)
-                # rus_text = translator.translate('\n'.join(answer), dest='ru').text
                 try:
-                    pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], translator.translate('\n'.join(answer), dest='ru').text) #\n join answer chat gpt выдает ответы в формате стоки на английском
-                except:
-                    pass
-                with open("plan.pdf", "rb") as misc:
-                    obj = BytesIO(misc.read())
-                    obj.name = 'plan.pdf'
-                bot.send_document(user_id, obj)
-                os.remove('plan.pdf')
+                    if message.from_user.language_code == 'ru':
+                        print(temp_user_data.temp_data(user_id)[user_id][2])
+                        answer = chat_gpt.gpt_query(GoogleTranslator(source='auto', target='en').translate(text=f"Вопросы{','.join(temp_user_data.temp_data(user_id)[user_id][4])}Ответы на вопросы{','.join(temp_user_data.temp_data(user_id)[user_id][5])}Для бизнеса с названием{temp_user_data.temp_data(user_id)[user_id][2]}"),
+                            temp_user_data.temp_data(user_id)[user_id][1], 1)
+                        pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], GoogleTranslator(source='auto', target='ru').translate(text='\n'.join(answer))) #\n join answer chat gpt выдает ответы в формате стоки на английском
+                    else:
+                        answer = chat_gpt.gpt_query(GoogleTranslator(source='auto', target='en').translate(f"\nQuestions:\n{','.join(temp_user_data.temp_data(user_id)[user_id][4])}\nAnswers to the above questions:\n{','.join(temp_user_data.temp_data(user_id)[user_id][5])}\n For a business with a name {temp_user_data.temp_data(user_id)[user_id][2]}"),
+                            temp_user_data.temp_data(user_id)[user_id][1], 1)
+                        pdf_creator.create_pdf(temp_user_data.temp_data(user_id)[user_id][2], '\n'.join(answer))
+                    with open("plan.pdf", "rb") as misc:
+                        obj = BytesIO(misc.read())
+                        obj.name = 'plan.pdf'
+                    bot.send_document(user_id, obj)
+                    os.remove('plan.pdf')
+                except Exception as e:
+                    print(e)
+                    bot.send_message(user_id, 'Произошла ошибка. Попробуйте ещё раз')
                 temp_user_data.clear_temp_data(user_id)
 
     bot.polling(none_stop=True)
