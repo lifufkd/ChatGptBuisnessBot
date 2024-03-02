@@ -34,23 +34,35 @@ class TempUserData:
 class ChatGpt:
     def __init__(self):
         super(ChatGpt, self).__init__()
-        self.__base_prompt = {'ru': {0: 'Составь наводящие вопросы связанные друг с другом помогающие скоректировать курс бизнеса название моего бизнеса ',
-                                     1: 'Напиши подробный бизнес-план для моего бизнеса отвечающего требованиям по вопросам и ответам на них в соответственном порядке'},
-                              'en': {0: 'Make up guiding questions related to each other that help correct the course of the business also give examples and results my business name ',
-                                     1: 'Write a very detailed business plan for my business that meets the requirements for questions and answers in the appropriate order'}}
 
     def detect_language(self, text):
         return detect(text)
 
-    def gpt_query(self, prompt, lang, index):
-        if lang != 'ru':
-            lang = 'en'
+    def gpt_query(self, prompt, index):
         answer = ''
+        if index == 0:
+            base_prompt = f"You are a business consultant. Understand the client's needs, learn more about their business," \
+                          f" {prompt}, understand their goals, problems and expectations, ask questions to deepen your " \
+                          f"understanding of the situation and business needs. Your questions should be easy to understand " \
+                          f"for the client, don't go into complex terminology or go off topic about the client's business. " \
+                          f"The questions should be logical, connected questions so that you have a clear understanding of " \
+                          f"the client's business. "
+        else:
+            base_prompt = f"based on the {prompt[1]} provided to the {prompt[0]}, assess the company's current strategies, " \
+                          f"processes and resources. After the assessment, analyze the data and develop specific " \
+                          f"recommendations and strategies to improve their business. Provide the result as formatted text"
         try:
-            answer = Client.create_completion("gpt3", f'{self.__base_prompt[lang][index]}{prompt}')
+            answer = Client.create_completion("gpt3", f'{base_prompt}')
         except:
             pass
-        return answer.split('\n')
+        if index == 0:
+            t = list()
+            for i in answer.split('?'):
+                if len(i) != 0:
+                    t.append(i)
+            return t
+        else:
+            return answer.split('\n')
 
 
 class PDFCreate:
