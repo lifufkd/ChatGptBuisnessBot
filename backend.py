@@ -22,8 +22,7 @@ class TempUserData:
 
     def temp_data(self, user_id):
         if user_id not in self.__user_data.keys():
-            self.__user_data.update({user_id: [None, None, None, -1, [],
-                                               []]})  # status, lang, main_question, counter_of_sub_quests, answers
+            self.__user_data.update({user_id: [None, None, None, -1, [],[]]})  # status, lang, main_question, counter_of_sub_quests, answers
         return self.__user_data
 
     def clear_temp_data(self, user_id):

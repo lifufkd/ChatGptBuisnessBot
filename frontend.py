@@ -13,8 +13,8 @@ class Bot_inline_btns:
         self.__markup = types.InlineKeyboardMarkup(row_width=1)
 
     def start_btns(self):
-        subscribe1 = types.InlineKeyboardButton('Изменить промт для создания вопросов')
-        subscribe2 = types.InlineKeyboardButton('Изменить промт для анализа ответов')
+        subscribe1 = types.InlineKeyboardButton('Изменить промт для создания вопросов', callback_data='subscribe1')
+        subscribe2 = types.InlineKeyboardButton('Изменить промт для анализа ответов', callback_data='subscribe2')
         self.__markup.add(subscribe1, subscribe2)
         return self.__markup
 
