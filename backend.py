@@ -32,8 +32,9 @@ class TempUserData:
 
 
 class ChatGpt:
-    def __init__(self):
+    def __init__(self, config):
         super(ChatGpt, self).__init__()
+        self.__config = config
 
     def detect_language(self, text):
         return detect(text)
@@ -41,16 +42,9 @@ class ChatGpt:
     def gpt_query(self, prompt, index):
         answer = ''
         if index == 0:
-            base_prompt = f"You are a business consultant. Understand the client's needs, learn more about their business," \
-                          f" {prompt}, understand their goals, problems and expectations, ask questions to deepen your " \
-                          f"understanding of the situation and business needs. Your questions should be easy to understand " \
-                          f"for the client, don't go into complex terminology or go off topic about the client's business. " \
-                          f"The questions should be logical, connected questions so that you have a clear understanding of " \
-                          f"the client's business. "
+            base_prompt = self.__config.get_config()['promt1'] + prompt
         else:
-            base_prompt = f"based on the {prompt[1]} provided to the {prompt[0]}, assess the company's current strategies, " \
-                          f"processes and resources. After the assessment, analyze the data and develop specific " \
-                          f"recommendations and strategies to improve their business. Provide the result as formatted text"
+            base_prompt = self.__config.get_config()['promt2'] + prompt[0] + prompt[1]
         try:
             answer = Client.create_completion("gpt3", f'{base_prompt}')
         except:
