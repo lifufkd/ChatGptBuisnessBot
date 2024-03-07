@@ -7,8 +7,6 @@ import copy
 from freeGPT import Client
 from langdetect import detect
 from fpdf import FPDF
-from PIL import Image
-from googletrans import Translator
 
 
 #####################################
