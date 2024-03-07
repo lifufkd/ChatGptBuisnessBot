@@ -22,8 +22,7 @@ class TempUserData:
 
     def temp_data(self, user_id):
         if user_id not in self.__user_data.keys():
-            self.__user_data.update({user_id: [None, None, None, -1, [],
-                                               []]})  # status, lang, main_question, counter_of_sub_quests, answers
+            self.__user_data.update({user_id: [None, None, None, -1, [],[]]})  # status, lang, main_question, counter_of_sub_quests, answers
         return self.__user_data
 
     def clear_temp_data(self, user_id):
@@ -32,25 +31,31 @@ class TempUserData:
 
 
 class ChatGpt:
-    def __init__(self):
+    def __init__(self, config):
         super(ChatGpt, self).__init__()
-        self.__base_prompt = {'ru': {0: 'Составь наводящие вопросы связанные друг с другом помогающие скоректировать курс бизнеса название моего бизнеса ',
-                                     1: 'Напиши подробный бизнес-план для моего бизнеса отвечающего требованиям по вопросам и ответам на них в соответственном порядке'},
-                              'en': {0: 'Make up guiding questions related to each other that help correct the course of the business also give examples and results my business name ',
-                                     1: 'Write a very detailed business plan for my business that meets the requirements for questions and answers in the appropriate order'}}
+        self.__config = config
 
     def detect_language(self, text):
         return detect(text)
 
-    def gpt_query(self, prompt, lang, index):
-        if lang != 'ru':
-            lang = 'en'
+    def gpt_query(self, prompt, index):
         answer = ''
+        if index == 0:
+            base_prompt = self.__config.get_config()['promt1'] + prompt
+        else:
+            base_prompt = self.__config.get_config()['promt2'] + prompt[0] + prompt[1]
         try:
-            answer = Client.create_completion("gpt3", f'{self.__base_prompt[lang][index]}{prompt}')
+            answer = Client.create_completion("gpt3", f'{base_prompt}')
         except:
             pass
-        return answer.split('\n')
+        if index == 0:
+            t = list()
+            for i in answer.split('?'):
+                if len(i) != 0:
+                    t.append(i)
+            return t
+        else:
+            return answer.split('\n')
 
 
 class PDFCreate: # создать PDF файл
@@ -58,6 +63,7 @@ class PDFCreate: # создать PDF файл
         super(PDFCreate, self).__init__()
 
     def create_pdf(self, company_name, text):
+        print(company_name)
         print(text)
         # Создаем PDF файл с дизайном
         pdf = FPDF()
