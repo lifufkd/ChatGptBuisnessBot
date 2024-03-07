@@ -53,7 +53,7 @@ class ChatGpt:
         return answer.split('\n')
 
 
-class PDFCreate:
+class PDFCreate: # создать PDF файл
     def __init__(self):
         super(PDFCreate, self).__init__()
 
@@ -61,12 +61,12 @@ class PDFCreate:
         print(text)
         # Создаем PDF файл с дизайном
         pdf = FPDF()
-        pdf.add_font('Arial', '', 'arial.ttf', uni=True)
-        pdf.add_page()
-        pdf.set_auto_page_break(auto=True, margin=15)
+        pdf.add_font('Arial', '', 'arial.ttf', uni=True) # 'Arial' - название шрифта, 'ariat.ttf' - сам шрифт (должен быть в папке с файлами)
+        pdf.add_page() # добавить страницу
+        pdf.set_auto_page_break(auto=True, margin=15) # Включает или отключает режим автоматического разрыва страниц
 
         # Добавляем первую страницу в PDF файл
-        pdf.image('FirstPage.png', x=0, y=0, w=210, h=297)
+        pdf.image('FirstPage.png', x=0, y=0, w=210, h=297) # добавить фотографию
 
         # Добавляем вторую страницу с дизайном в PDF файл
         pdf.add_page()
@@ -76,15 +76,15 @@ class PDFCreate:
         # Добавляем вторую страницу в PDF файл
         pdf.add_page()
         pdf.image('SecondPage.png', x=0, y=0, w=210, h=297)
-        pdf.set_xy(0, 100)
-        pdf.set_text_color(255, 255, 255)
-        pdf.set_font('Arial', 'B', size=28)
-        pdf.cell(220, -125, company_name, 0, 1, 'C')
+        pdf.set_xy(0, 100) # поставить фото по координатам x y
+        pdf.set_text_color(255, 255, 255) # поставить цвет текста
+        pdf.set_font('Arial', 'B', size=28) # поставить текст 'B' - Bold (жирный)
+        pdf.cell(220, -125, company_name, 0, 1, 'C') #вставить текст "company name"
         pdf.set_text_color(0, 0, 0)
         pdf.set_font('Arial', size=15)
         # Добавляем ответы бота на 10 вопросов
         pdf.set_xy(0, 100)
-        pdf.multi_cell(w=0, h=10, txt=text)
+        pdf.multi_cell(w=0, h=10, txt=text) # вставить много текста, в этом случае - ответ от бота.
 
 
         # # Добавляем последнюю страницу в PDF файл
@@ -92,4 +92,4 @@ class PDFCreate:
         # pdf.image('LastPage.png', x=0, y=0, w=210, h=297)
 
         # Сохраняем изменения в PDF файле
-        pdf.output('plan.pdf')
+        pdf.output('plan.pdf') # вывод PDF файла на диск
